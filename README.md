@@ -47,9 +47,16 @@ conda activate gwas_env
 
 ```
 python main.py \
-  --genome-build hg19 \
+  --genome-build hg19/hg38 \
   --ip-path "path/to/your/gwas_summary.tsv.gz" \
-  --op-path "path/to/save/output/"
+  --op-path "path/to/save/output/" \
+  --col-chr Column name for chromosome \
+  --col-pos Column name for base pair location \
+  --col-ea Column name for effect allele/alt \
+  --col-oa Column name for other allele/ref \
+  --col-effect Column name for beta \
+  --col-eaf Column name for effect allele frequency
+  --col-vid Column name for variant ID
 ```
 
 #### Arguments
@@ -57,9 +64,16 @@ python main.py \
 - `--genome-build` : Genome build of the input GWAS dataset (hg19 or hg38)
 - `--ip-path` : Path to the input GWAS summary statistics file
 - `--op-path` : Directory path where the processed and updated GWAS output file should be saved
+- `--col-chr` : Column name for chromosome
+- `--col-pos` : Column name for base pair location
+- `--col-ea` : Column name for effect allele/alt
+- `--col-oa` : Column name for other allele/ref
+- `--col-effect` : Column name for beta
+- `--col-eaf` : Column name for effect allele frequency
+- `--col-vid` : Column name for variant ID
 
 ### Notes
-- The input GWAS file should atleast have these columns, named in this format: `chromosome`, `base_pair_location`, `effect_allele`, `other_allele`, `beta`, `effect_allele_frequency`, `variant_id`.
+- The input GWAS file should atleast have these columns (not necessarily named in this format): `chromosome`, `base_pair_location`, `effect_allele`, `other_allele`, `beta`, `effect_allele_frequency`, `variant_id`.
 - Ensure your input file is tab-delimited (.tsv) and follows a consistent format.
 - The script expects a reference SNP list `1kg_hg38_hm3.snplist` located in a `data/` directory one level above the script. This file is included in the repository. 
 - The processed GWAS data will be saved as `GWAS_new_1M.tsv` within the directory specified by `--op-path`.
