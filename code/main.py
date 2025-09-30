@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--col-vid", required=True, help="Column name for variant ID")
 
     # Effect size type: beta or odds ratio
-    #parser.add_argument("--effect-type", type=str, required=True, choices=["beta", "OR"], help="'beta' or 'OR' (odds ratio) present")
+    parser.add_argument("--effect-type", type=str, required=True, choices=["beta", "OR"], help="'beta' or 'OR' (odds ratio) present")
 
     args = parser.parse_args()
 
@@ -37,13 +37,16 @@ def main():
     #print(column_names)
 
     # If odds ratio is present, convert it to beta
-    # if args.effect_type == "OR":
-    #     print("Converting to odds ratio to beta...")
-    #     gwas_df = gwas_df.with_columns(
-    #         (pl.col(args.col_effect).log()).alias("beta")  # log(OR) = beta
-    #     )
-    #     args.col_effect="beta"
-        #print(gwas_df[args.col_vid, args.col_effect, "beta"])
+    if args.effect_type == "OR":
+        print("Converting to odds ratio to beta...")
+        if "beta" in gwas_df.columns:
+            print("Existing 'beta' column found. Dropping it before conversion...")
+            # Drop the existing 'beta' column
+            gwas_df = gwas_df.drop("beta")
+        gwas_df = gwas_df.with_columns(
+            (pl.col(args.col_effect).log().round(decimals=3)).alias("beta")  # log(OR) = beta
+        )
+        args.col_effect="beta"
 
     # Prepare for Join and Liftover: Cast 'chromosome' column in 'gwas_df' to Utf8 
     # This ensures matching data types for join keys between gwas_df and ref_df.
