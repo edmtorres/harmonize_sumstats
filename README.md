@@ -47,16 +47,17 @@ conda activate gwas_env
 
 ```
 python main.py \
-  --genome-build hg19/hg38 \
+  --genome-build hg19 or hg38 \
   --ip-path "path/to/your/gwas_summary.tsv.gz" \
   --op-path "path/to/save/output/" \
   --col-chr Column name for chromosome \
   --col-pos Column name for base pair location \
   --col-ea Column name for effect allele/alt \
   --col-oa Column name for other allele/ref \
-  --col-effect Column name for beta \
-  --col-eaf Column name for effect allele frequency
-  --col-vid Column name for variant ID
+  --col-effect Column name for the effect size (like beta or odds ratio) \
+  --col-eaf Column name for effect allele frequency \
+  --col-vid Column name for variant ID \
+  --effect-type OR or beta 
 ```
 
 #### Arguments
@@ -68,12 +69,13 @@ python main.py \
 - `--col-pos` : Column name for base pair location
 - `--col-ea` : Column name for effect allele/alt
 - `--col-oa` : Column name for other allele/ref
-- `--col-effect` : Column name for beta
+- `--col-effect` : Column name for the effect size (like beta or odds ratio)
 - `--col-eaf` : Column name for effect allele frequency
 - `--col-vid` : Column name for variant ID
+- `--effect-type` : Whether you have a 'beta' or odds ratio 'OR' as the effect type in the input dataset
 
 ### Notes
-- The input GWAS file should atleast have these columns (not necessarily named in this format): `chromosome`, `base_pair_location`, `effect_allele`, `other_allele`, `beta`, `effect_allele_frequency`, `variant_id`.
+- The input GWAS file should atleast have these columns (not necessarily named in this format): `chromosome`, `base_pair_location`, `effect_allele`, `other_allele`, `beta`/`odds_ratio`, `effect_allele_frequency`, `variant_id`.
 - Ensure your input file is tab-delimited (.tsv) and follows a consistent format.
 - The script expects a reference SNP list `1kg_hg38_hm3.snplist` located in a `data/` directory one level above the script. This file is included in the repository. 
 - The processed GWAS data will be saved as `GWAS_new_1M.tsv` within the directory specified by `--op-path`.
