@@ -8,9 +8,9 @@ import polars as pl
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-g", "--genome-build", type=str, required=True, choices=["hg19", "hg38"], help="Genome build of the GWAS file (e.g: hg19, hg38)")
-    parser.add_argument("-i", "--ip-path", type=str, required=True, help="File path to input GWAS dataset")
-    parser.add_argument("-o", "--op-path", type=str, required=True, help="File path to save output file")
+    parser.add_argument("--genome-build", type=str, required=True, choices=["hg19", "hg38"], help="Genome build of the GWAS file (e.g: hg19, hg38)")
+    parser.add_argument("--ip-path", type=str, required=True, help="File path to input GWAS dataset")
+    parser.add_argument("--op-path", type=str, required=True, help="File path to save output file")
 
     # Column name arguments
     parser.add_argument("--col-chr", required=True, help="Column name for chromosome")
