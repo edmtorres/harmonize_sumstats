@@ -1,0 +1,35 @@
+name: bioinfo
+channels:
+  - conda-forge
+  - bioconda       
+  - defaults
+dependencies:
+  - python=3.12
+  - aria2
+  - bcftools
+  - bedtools
+  - bioawk
+  - blast
+  - bowtie2
+  - bwa
+  - csvkit
+  - csvtk
+  - datamash
+  - fastp
+  - fastqc
+  - hisat2
+  - jq
+  - mafft
+  - make>4
+  - minimap2
+  - ncbi-datasets-cli
+  - parallel
+  - perl-text-csv
+  - samtools>=1.14
+  - seqkit
+  - seqtk
+  - snpeff==5.0
+  - subread
+  - trimmomatic
+  - ucsc-bedgraphtobigwig
+  - wget
